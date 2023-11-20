@@ -8,14 +8,19 @@ I am currently planning the architecture for the first version.
 </br>
 </br>
 This side project was designed in just a few days, and there are still many areas that require further refinement.
-</br></br>
+</br>
+</br>
 1.Using Spring Quartz to schedule the execution of an API at regular intervals.
+</br>
 2.Using Spring Batch for batch processing of large volumes of data.
+</br>
 3.Implementing high availability by using Redis master-slave replication and sentinel.
+</br>
 4.Using Redisson's distributed lock to accurately calculate the usage count of the API.
-
+</br>
+</br>
 Execute the batch API: http://localhost:8081/batch/api/download?jobName=cityAndInterCityBusJob
-   </br>
+</br>
 Install the scheduled job into Quartz: http://localhost:8082/quartz/api/init
-   </br>
+</br>
 Activate the "cityAndInterCityBusJob" schedule within Quartz: http://localhost:8082/quartz/api/execute/123
