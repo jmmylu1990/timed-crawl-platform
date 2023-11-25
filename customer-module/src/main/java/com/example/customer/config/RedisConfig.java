@@ -49,14 +49,24 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     // key值命名
+//    @Bean
+//    public KeyGenerator wiselyKeyGenerator() {
+//        return new KeyGenerator() {
+//            @Override
+//            public Object generate(Object target, Method method, Object... params) {
+//                return method.getName() + ":"
+//                        + hashCode();
+//
+//            }
+//        };
+//    }
+
     @Bean
     public KeyGenerator wiselyKeyGenerator() {
         return new KeyGenerator() {
             @Override
             public Object generate(Object target, Method method, Object... params) {
-                return method.getName() + ":"
-                        + hashCode();
-
+                return target.getClass().getName() + ":" + method.getName();
             }
         };
     }

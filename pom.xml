@@ -19,7 +19,8 @@
 		<module>quartz-module</module>
 		<module>customer-module</module>
 		<module>customer-module2</module>
-	</modules>
+        <module>kafka-consumer-module</module>
+    </modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
