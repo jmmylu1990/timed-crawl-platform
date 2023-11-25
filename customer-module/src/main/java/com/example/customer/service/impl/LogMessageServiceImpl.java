@@ -34,7 +34,5 @@ public class LogMessageServiceImpl implements LogMessageService {
                 log.info("生產者成功傳送訊息到" + topic + "-> " + sendResult.getProducerRecord().value().toString());
             }
         });
-
-        System.out.println("抓抓");
     }
 }

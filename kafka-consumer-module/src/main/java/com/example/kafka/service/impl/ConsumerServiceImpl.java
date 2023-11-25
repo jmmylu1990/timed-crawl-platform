@@ -1,7 +1,6 @@
 package com.example.kafka.service.impl;
 
 import com.example.kafka.model.ApiLog;
-import com.example.kafka.model.Book;
 import com.example.kafka.service.ConsumerService;
 import com.example.kafka.service.RedisService;
 import com.fasterxml.jackson.core.JsonProcessingException;

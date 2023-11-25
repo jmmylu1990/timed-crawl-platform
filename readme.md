@@ -24,7 +24,10 @@ Batch-module's API use the Ministry of Transportation's TDX service, and obtaini
 4.Using Redisson's distributed lock to accurately calculate the usage count of the API.
 </br>
 </br>
-5.Using Ministry of Transportation's API, It's need TDX token,
+5.Using Spring Batch to enqueue AOP requests to Redis. (Modifyed the content in the fourth point.)
+</br>
+</br>
+6.Using Ministry of Transportation's API, It's need TDX token,
 </br>
 </br>
 Execute the batch API: http://localhost:8081/batch/api/download?jobName=cityAndInterCityBusJob

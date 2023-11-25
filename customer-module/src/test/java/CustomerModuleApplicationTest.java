@@ -32,27 +32,19 @@ public class CustomerModuleApplicationTest {
         // Concurrent requests to URL1
         for (int i = 0; i < concurrentThreads; i++) {
             futures.add(CompletableFuture.runAsync(() -> {
-                try {
-                    Thread.sleep(1000);
+
                     restTemplate.getForObject(url1, String.class);
                     latch.countDown();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
             }, executorService));
         }
 
         // Concurrent requests to URL2
         for (int i = 0; i < concurrentThreads; i++) {
             futures.add(CompletableFuture.runAsync(() -> {
-                try {
-                    Thread.sleep(1000);
+
                     restTemplate.getForObject(url2, String.class);
                     latch.countDown();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+
             }, executorService));
         }
 
