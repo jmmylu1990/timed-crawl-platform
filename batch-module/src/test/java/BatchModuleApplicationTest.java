@@ -1,5 +1,6 @@
 import com.example.batch.BatchModuleApplication;
 
+import com.example.batch.job.model.CityAndInterCityBus;
 import com.example.batch.utils.DateUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,6 +43,7 @@ public class BatchModuleApplicationTest {
                 .addString("resourceURL","https://tdx.transportdata.tw/api/basic/v2/Bus/Vehicle?%24top=30&%24format=JSON")
                 .addString("filePath",batchDownloadPath)
                 .addString("jobFileName",String.format("%s%s.txt","cityAndInterCityBusJob", DateUtils.now("yyyyMMddHHmmss")))
+                .addString("classFullName", CityAndInterCityBus.class.getName())
                 .toJobParameters();
 
         JobExecution jobExecution =  jobLauncher.run(importCityAndInterCityBusJob,jobParameters);

@@ -7,7 +7,7 @@ import org.springframework.batch.core.repository.JobRestartException;
 
 public interface BatchJobService {
 
-  String cityAndInterCityBusJob(String jobName) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException;
+  String executeJob(String jobName) throws Exception;
 
 
 }

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface ApiBatchJobInfoRepository extends JpaRepository<ApiBatchJobInfo,String> {
-    ApiBatchJobInfo findByJobName(String jobName);
+    ApiBatchJobInfo findByExecuteName(String executeName);
 
 }

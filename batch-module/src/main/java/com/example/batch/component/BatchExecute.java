@@ -1,8 +1,11 @@
 package com.example.batch.component;
 
+import com.example.batch.job.model.CityAndInterCityBus;
 import com.example.batch.job.model.base.ApiBatchJobInfo;
 import com.example.batch.repository.ApiBatchJobInfoRepository;
+import com.example.batch.utils.ClassUtils;
 import com.example.batch.utils.DateUtils;
+import org.jsoup.select.Evaluator;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
@@ -29,21 +32,32 @@ public class BatchExecute {
     @Autowired
     private ApiBatchJobInfoRepository apiBatchJobInfoRepository;
 
-    public String run(String jobName) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
+    public String run(String executeName) throws Exception {
+
         String batchDownloadPath = System.getProperty("user.home") + downloadPath;
-        ApiBatchJobInfo apiBatchJobInfo = apiBatchJobInfoRepository.findByJobName(jobName);
-        String apiJobName = apiBatchJobInfo.getJobName();
+        ApiBatchJobInfo apiBatchJobInfo = apiBatchJobInfoRepository.findByExecuteName(executeName);
+        String jobType = apiBatchJobInfo.getJobType().getType();
+        String dataFormat = apiBatchJobInfo.getDataFormat().getFormat();
+        String className = apiBatchJobInfo.getClassName();
+        Long chunkSize = apiBatchJobInfo.getChunkSize().longValue();
         String apiResourceURL = apiBatchJobInfo.getResourceURL();
 
         JobParameters jobParameters = new JobParametersBuilder()
+                .addString("executeName", executeName)
+                .addString("jobType", jobType)
+                .addString("dataFormat", dataFormat)
+                .addString("className", className)
+                .addLong("chunkSize", chunkSize)
+                .addString("resourceURL", apiResourceURL)
                 .addLong("time", System.currentTimeMillis())
-                .addString("jobName",apiJobName)
-                .addString("resourceURL",apiResourceURL)
-                .addString("filePath",batchDownloadPath)
-                .addString("jobFileName",String.format("%s%s.txt",apiJobName, DateUtils.now("yyyyMMddHHmmss")))
+                .addString("filePath", batchDownloadPath)
+                .addString("jobFileName", String.format("%s%s.txt", executeName, DateUtils.now("yyyyMMddHHmmss")))
                 .toJobParameters();
-        Job job = jobs.get(apiJobName);
-        JobExecution jobExecution = jobLauncher.run(job,jobParameters);
+
+        String jobName = String.format("%sJob", jobType);
+        Job job = jobs.get(jobName);
+
+        JobExecution jobExecution = jobLauncher.run(job, jobParameters);
 
         return jobExecution.getExitStatus().getExitCode();
     }

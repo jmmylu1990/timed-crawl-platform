@@ -22,7 +22,7 @@ public class BatchJobServiceImpl implements BatchJobService {
     private BatchExecute batchExecute;
 
     @Override
-    public String cityAndInterCityBusJob(String jobName) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-        return batchExecute.run(jobName);
+    public String executeJob(String executeName) throws Exception {
+        return batchExecute.run(executeName);
     }
 }

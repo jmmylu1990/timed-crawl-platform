@@ -18,8 +18,8 @@ public class BatchController {
     @Autowired
     private BatchJobService batchJobService;
 
-    @GetMapping("/download")
-    public String cityAndInterCityBusJob(@RequestParam String jobName) throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-        return batchJobService.cityAndInterCityBusJob(jobName);
+    @GetMapping("/execute")
+    public String cityAndInterCityBusJob(@RequestParam String executeName) throws Exception {
+        return batchJobService.executeJob(executeName);
     }
 }
